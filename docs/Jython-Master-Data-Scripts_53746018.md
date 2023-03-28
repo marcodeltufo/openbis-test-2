@@ -1,12 +1,22 @@
+::: {#page}
+::: {#main .aui-page-panel}
+::: {#main-header}
+::: {#breadcrumb-section}
 1.  [openBIS Documentation Rel. 20.10](index.html)
+:::
 
-<span id="title-text"> openBIS Documentation Rel. 20.10 : Jython Master Data Scripts </span>
-============================================================================================
+[ openBIS Documentation Rel. 20.10 : Jython Master Data Scripts ]{#title-text} {#title-heading .pagetitle}
+==============================================================================
+:::
 
-Created by <span class="author"> Fuentes Serna Juan Mariano (ID)</span>,
-last modified by <span class="editor"> Kovtun Viktor (ID)</span> on Mar
-10, 2023
+::: {#content .view}
+::: {.page-metadata}
+Created by [ Fuentes Serna Juan Mariano (ID)]{.author}, last modified by
+[ Kovtun Viktor (ID)]{.editor} on Mar 10, 2023
+:::
 
+::: {#main-content .wiki-content .group}
+::: {.toc-macro .rbtoc1678781405410}
 -   [Introduction](#JythonMasterDataScripts-Introduction)
     -   [API Basics](#JythonMasterDataScripts-APIBasics)
     -   [Simple example](#JythonMasterDataScripts-Simpleexample)
@@ -15,16 +25,17 @@ last modified by <span class="editor"> Kovtun Viktor (ID)</span> on Mar
             scripts](#JythonMasterDataScripts-Executingmasterdatascripts)
         -   [Exporting master
             data](#JythonMasterDataScripts-Exportingmasterdata)
+:::
 
-Introduction
+Introduction {#JythonMasterDataScripts-Introduction}
 ============
 
-openBIS defines as "Master data" all metadata configurations needed
+openBIS defines as \"Master data\" all metadata configurations needed
 before the import of the real raw data. Master data includes
 experiment/sample/data set/property/file types, vocabularies and
 property assignments.
 
-API Basics
+API Basics {#JythonMasterDataScripts-APIBasics}
 ----------
 
 Similarly to the [Jython Dropbox
@@ -32,7 +43,13 @@ API](https://unlimited.ethz.ch/pages/viewpage.action?pageId=53746029)
 the script can access a global variable named `service`, which can be
 used to create transactions.
 
-    transaction = service.transaction()
+::: {.code .panel .pdl style="border-width: 1px;"}
+::: {.codeContent .panelContent .pdl}
+``` {.syntaxhighlighter-pre syntaxhighlighter-params="brush: python; gutter: false; theme: Confluence" theme="Confluence"}
+transaction = service.transaction()
+```
+:::
+:::
 
 The transactions are a focal API concept offering to create new types
 (e.g. `createNewSampleType`, `createNewDataSetType`) and new property
@@ -40,95 +57,110 @@ assignments (e.g. `assignPropertyType`).
 
 The complete Javadoc for the API is available at
 
-<table>
-<tbody>
-<tr class="odd">
-<td><p><a href="https://openbis.ch/javadoc/20.10.x/javadoc-openbis/ch/systemsx/cisd/openbis/generic/server/jython/api/v1/IMasterDataRegistrationService.html" class="external-link">IMasterDataRegistrationService</a></p></td>
-<td><p>The global service variable</p></td>
-</tr>
-<tr class="even">
-<td><p><a href="https://openbis.ch/javadoc/20.10.x/javadoc-openbis/ch/systemsx/cisd/openbis/generic/server/jython/api/v1/IMasterDataRegistrationTransaction.html" class="external-link">IMasterDataRegistrationTransaction</a></p></td>
-<td><p>The public API of the transaction objects</p></td>
-</tr>
-<tr class="odd">
-<td><p><a href="https://openbis.ch/javadoc/20.10.x/javadoc-openbis/ch/systemsx/cisd/openbis/generic/server/jython/api/v1/package-summary.html" class="external-link">All classes</a></p></td>
-<td><p>Javadocs for the complete API package</p></td>
-</tr>
-</tbody>
-</table>
+::: {.table-wrap}
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------
+  [IMasterDataRegistrationService](https://openbis.ch/javadoc/20.10.x/javadoc-openbis/ch/systemsx/cisd/openbis/generic/server/jython/api/v1/IMasterDataRegistrationService.html){.external-link}           The global service variable
+  [IMasterDataRegistrationTransaction](https://openbis.ch/javadoc/20.10.x/javadoc-openbis/ch/systemsx/cisd/openbis/generic/server/jython/api/v1/IMasterDataRegistrationTransaction.html){.external-link}   The public API of the transaction objects
+  [All classes](https://openbis.ch/javadoc/20.10.x/javadoc-openbis/ch/systemsx/cisd/openbis/generic/server/jython/api/v1/package-summary.html){.external-link}                                             Javadocs for the complete API package
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------
+:::
 
-Simple example
+Simple example {#JythonMasterDataScripts-Simpleexample}
 --------------
 
-    import ch.systemsx.cisd.openbis.generic.client.jython.api.v1.DataType as DataType
+::: {.code .panel .pdl style="border-width: 1px;"}
+::: {.codeContent .panelContent .pdl}
+``` {.syntaxhighlighter-pre syntaxhighlighter-params="brush: python; gutter: false; theme: Confluence" theme="Confluence"}
+import ch.systemsx.cisd.openbis.generic.client.jython.api.v1.DataType as DataType
 
-    tr = service.transaction()
+tr = service.transaction()
 
-    expType = tr.createNewExperimentType('EXPERIMENT-TYPE')
-    expType.setDescription('Experiment type description.')
+expType = tr.createNewExperimentType('EXPERIMENT-TYPE')
+expType.setDescription('Experiment type description.')
 
-    sampleType = tr.createNewSampleType('SAMPLE-TYPE')
-    sampleType.setDescription('Sample type description.')
-    sampleType.setSubcodeUnique(True)
-    sampleType.setAutoGeneratedCode(True)
-    sampleType.setGeneratedCodePrefix("G_");
+sampleType = tr.createNewSampleType('SAMPLE-TYPE')
+sampleType.setDescription('Sample type description.')
+sampleType.setSubcodeUnique(True)
+sampleType.setAutoGeneratedCode(True)
+sampleType.setGeneratedCodePrefix("G_");
 
-    dataSetType = tr.createNewDataSetType('DATA-SET-TYPE')
-    dataSetType.setContainerType(True)
-    dataSetType.setDescription('Data set type description.')
+dataSetType = tr.createNewDataSetType('DATA-SET-TYPE')
+dataSetType.setContainerType(True)
+dataSetType.setDescription('Data set type description.')
 
-    materialType = tr.createNewMaterialType('MATERIAL-TYPE')
-    materialType.setDescription('Material type description.')
+materialType = tr.createNewMaterialType('MATERIAL-TYPE')
+materialType.setDescription('Material type description.')
 
-    stringPropertyType = tr.createNewPropertyType('VARCHAR-PROPERTY-TYPE', DataType.VARCHAR)
-    stringPropertyType.setDescription('Varchar property type description.')
-    stringPropertyType.setLabel('STRING')
+stringPropertyType = tr.createNewPropertyType('VARCHAR-PROPERTY-TYPE', DataType.VARCHAR)
+stringPropertyType.setDescription('Varchar property type description.')
+stringPropertyType.setLabel('STRING')
 
-    materialPropertyType = tr.createNewPropertyType('MATERIAL-PROPERTY-TYPE', DataType.MATERIAL)
-    materialPropertyType.setDescription('Material property type description.')
-    materialPropertyType.setLabel('MATERIAL')
-    materialPropertyType.setMaterialType(materialType)
-    materialPropertyType.setManagedInternally(False)
+materialPropertyType = tr.createNewPropertyType('MATERIAL-PROPERTY-TYPE', DataType.MATERIAL)
+materialPropertyType.setDescription('Material property type description.')
+materialPropertyType.setLabel('MATERIAL')
+materialPropertyType.setMaterialType(materialType)
+materialPropertyType.setManagedInternally(False)
 
-    # assigns the newly created property 'MATERIAL-PROPERTY-TYPE'
-    # as a mandatory property for 'SAMPLE-TYPE'
-    materialAssignment = tr.assignPropertyType(sampleType, materialPropertyType)
-    materialAssignment.setMandatory(True)
+# assigns the newly created property 'MATERIAL-PROPERTY-TYPE'
+# as a mandatory property for 'SAMPLE-TYPE'
+materialAssignment = tr.assignPropertyType(sampleType, materialPropertyType)
+materialAssignment.setMandatory(True)
 
-    # assigns the newly created property 'VARCHAR-PROPERTY-TYPE'
-    # as an optional property for 'EXPERIMENT-TYPE' with default value 'FOO_BAR'
-    stringAssignement = tr.assignPropertyType(expType, stringPropertyType)
-    stringAssignement.setMandatory(False)
-    stringAssignement.setDefaultValue('FOO_BAR')
+# assigns the newly created property 'VARCHAR-PROPERTY-TYPE'
+# as an optional property for 'EXPERIMENT-TYPE' with default value 'FOO_BAR'
+stringAssignement = tr.assignPropertyType(expType, stringPropertyType)
+stringAssignement.setMandatory(False)
+stringAssignement.setDefaultValue('FOO_BAR')
+```
+:::
+:::
 
-Command line tools
+Command line tools {#JythonMasterDataScripts-Commandlinetools}
 ------------------
 
-### Executing master data scripts
+### Executing master data scripts {#JythonMasterDataScripts-Executingmasterdatascripts}
 
 Make sure openBIS AS is up and running prior script execution. Go to the
 openBIS AS installation folder. Assuming your script is
 `/local/master-data-script.py` and openBIS AS is started on the URL
 `     http://localhost:8888/openbis   ` execute the command
 
+::: {.preformatted .panel style="border-width: 1px;"}
+::: {.preformattedContent .panelContent}
     > cd /local0/openbis/servers/openBIS-server/jetty/bin
     > /register-master-data.sh -s http://localhost:8888/openbis/openbis -f /local/master-data-script.py
+:::
+:::
 
 You will be prompted for username/password before the script execution.
-Please note that the second 'openbis' is needed in the server address,
+Please note that the second \'openbis\' is needed in the server address,
 so that you connect via the API.
 
-### Exporting master data
+### Exporting master data {#JythonMasterDataScripts-Exportingmasterdata}
 
 You can export the master data from a running openBIS system as script
 by running the command
 
+::: {.preformatted .panel style="border-width: 1px;"}
+::: {.preformattedContent .panelContent}
     > cd /local0/openbis/servers/openBIS-server/jetty/bin
     > /export-master-data.sh -s http://localhost:8888/openbis/openbis
+:::
+:::
 
 This command will create a folder `exported-master-data-DATE` which will
 contain the exported master data script - `master-data.py`
+:::
+:::
+:::
 
+::: {#footer role="contentinfo"}
+::: {.section .footer-body}
 Document generated by Confluence on Mar 14, 2023 09:10
 
+::: {#footer-logo}
 [Atlassian](https://www.atlassian.com/)
+:::
+:::
+:::
+:::

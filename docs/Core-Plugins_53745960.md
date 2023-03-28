@@ -1,15 +1,25 @@
+::: {#page}
+::: {#main .aui-page-panel}
+::: {#main-header}
+::: {#breadcrumb-section}
 1.  [openBIS Documentation Rel. 20.10](index.html)
+:::
 
-<span id="title-text"> openBIS Documentation Rel. 20.10 : Core Plugins </span>
-==============================================================================
+[ openBIS Documentation Rel. 20.10 : Core Plugins ]{#title-text} {#title-heading .pagetitle}
+================================================================
+:::
 
-Created by <span class="author"> Fuentes Serna Juan Mariano (ID)</span>,
-last modified by <span class="editor"> Kovtun Viktor (ID)</span> on Aug
-22, 2022
+::: {#content .view}
+::: {.page-metadata}
+Created by [ Fuentes Serna Juan Mariano (ID)]{.author}, last modified by
+[ Kovtun Viktor (ID)]{.editor} on Aug 22, 2022
+:::
 
-Core Plugins
+::: {#main-content .wiki-content .group}
+Core Plugins {#CorePlugins-CorePlugins}
 ============
 
+::: {.toc-macro .rbtoc1678781405463}
 -   [Core Plugins](#CorePlugins-CorePlugins)
     -   [Motivation](#CorePlugins-Motivation)
     -   [Core Plugins Folder
@@ -27,8 +37,9 @@ Core Plugins
     -   [Rules for Plugin Writers](#CorePlugins-RulesforPluginWriters)
     -   [Using Java libraries in Core
         Plugins](#CorePlugins-UsingJavalibrariesinCorePlugins)
+:::
 
-Motivation
+Motivation {#CorePlugins-Motivation}
 ----------
 
 The `service.properties` file of openBIS Application Server (AS) and
@@ -42,7 +53,7 @@ maintenance task plugin can be added in an update without any need for
 an admin to put the configuration data manually into the
 `service.properties` file.
 
-Core Plugins Folder Structure
+Core Plugins Folder Structure {#CorePlugins-CorePluginsFolderStructure}
 -----------------------------
 
 All plugins whether they are a part of the distribution or added and
@@ -54,14 +65,14 @@ of `openBIS-server` and` datastore_server`.
 The folder structure is organized as follows:
 
 -   The file `core-plugins.properties` containing the following
-    properties:  
+    properties:\
     -   `enabled-modules`: comma-separated list of regular expressions
         for all enabled modules.
     -   `disabled-core-plugins`: comma-separated list of disabled
         plugins. All plugins are disabled for which the beginning of
         full plugin ID matches one of the terms of this list. To disable
-        initialization of master data of a module - disable it's core
-        plugin "initialize-master-data"
+        initialization of master data of a module - disable it\'s core
+        plugin \"initialize-master-data\"
 -   The children of `core-plugins` are folders denoting modules like the
     standard technologies, `proteomics` and `screening`. For
     customization, any module can be added.
@@ -71,12 +82,12 @@ The folder structure is organized as follows:
     have different largest version numbers.
 -   Every version folder has the subfolder `as` and/or` dss `which have
     subfolders for the various types of plugins. The types are different
-    for AS and DSS:  
-    -   AS:  
+    for AS and DSS:\
+    -   AS:\
         -   `maintenance-tasks`: Maintenance tasks triggered by some
             time schedule.`                            `Property `class`
             denotes fully-qualified class name of a class implementing
-            `ch.systemsx.cisd.common.maintenance.IMaintenanceTask`.  
+            `ch.systemsx.cisd.common.maintenance.IMaintenanceTask`.\
             For more details see [Maintenance
             Tasks](https://unlimited.ethz.ch/display/openBISDoc2010/Maintenance+Tasks).
         -   `dss-data-sources`: Definition of data sources with
@@ -97,13 +108,13 @@ The folder structure is organized as follows:
             more details see [openBIS
             webapps](openBIS-webapps_53745961.html).
         -   `miscellaneous`: Any additional properties.
-    -   `DSS:`  
+    -   `DSS:`\
         -   `drop-boxes`: ETL server threads for registration of data
             sets.`                            `
-        -   `reporting-plugins`: Reports visible in openBIS.  
+        -   `reporting-plugins`: Reports visible in openBIS.\
             Property `class` denotes fully-qualified class name of a
             class implementing
-            `ch.systemsx.cisd.openbis.dss.generic.server.plugins.tasks.IReportingPluginTask`.  
+            `ch.systemsx.cisd.openbis.dss.generic.server.plugins.tasks.IReportingPluginTask`.\
             For more details see [Reporting
             Plugins](https://unlimited.ethz.ch/display/openBISDoc2010/Reporting+Plugins).
         -   `processing-plugins`: Processing tasks triggered by
@@ -119,28 +130,27 @@ The folder structure is organized as follows:
             more details see [Maintenance
             Tasks](https://unlimited.ethz.ch/display/openBISDoc2010/Maintenance+Tasks).
         -   `search-domain-services`: Services for variaous search
-            domains (e.g. search on sequence databases using BLAST).  
+            domains (e.g. search on sequence databases using BLAST).\
             Property `class` denotes fully-qualified class name of a
             class implementing
             `ch.systemsx.cisd.openbis.dss.generic.shared.api.internal.v2.ISearchDomainService`.
         -   `data-sources`: Internal or external database sources.
-        -   `services`: Services based on servlets.  
+        -   `services`: Services based on servlets.\
             Property `class` denotes fully-qualified class name of a
             class implementing `javax.servlet.Servlet`.
         -   `imaging-overview-plugins`: Data set type specific provider
-            of the overview image of a data set.  
+            of the overview image of a data set.\
             Property `class` denotes fully-qualified class name of a
             class implementing
             `ch.systemsx.cisd.openbis.dss.generic.server.IDatasetImageOverviewPlugin`.
         -   `file-system-plugins`: Provider of a custom DSS file system
-            (FTP/SFTP) view hierarchy.  
+            (FTP/SFTP) view hierarchy.\
             Property `class` denotes fully-qualified class name of a
             class
-            implementing `ch.systemsx.cisd.openbis.dss.generic.server.fs.IResolverPlugin`  
-            Property <span
-            style="font-family: monospace;">code </span>denotes the name
-            of the top-level directory under which the custom hierarchy
-            will be visible
+            implementing `ch.systemsx.cisd.openbis.dss.generic.server.fs.IResolverPlugin`\
+            Property [code ]{style="font-family: monospace;"}denotes the
+            name of the top-level directory under which the custom
+            hierarchy will be visible
         -   `miscellaneous`: Any additional
             properties.`                            `
 -   Folders of each of these types can have an arbitrary number of
@@ -148,13 +158,15 @@ The folder structure is organized as follows:
     least one subfolder. Each defining one plugin. The name of these
     subfolders define the plugin ID. It has to be unique over all
     plugins independent of module and plugin type. It should not contain
-    the characters space ' ', comma '`,`', and equal sign '`=`'.
+    the characters space \' \', comma \'`,`\', and equal sign \'`=`\'.
 -   Each plugin folder should contain at least the file
     `plugin.properties`. There could be additional files (referred in
     `plugin.properties`) but no subfolders.
 
 Here is an example of a typical structure of a core plugins folder:
 
+::: {.preformatted .panel style="border-width: 1px;"}
+::: {.preformattedContent .panelContent}
     core-plugins
       core-plugins.properties
       proteomics
@@ -187,6 +199,8 @@ Here is an example of a typical structure of a core plugins folder:
                   custom-lib.jar
                 hcs-dropbox.py
                 plugin.properties
+:::
+:::
 
 You might noticed the file `initialize-master-data.py` in AS core
 plugins sections  in this example. It is a script to register master
@@ -198,8 +212,12 @@ Each plugin can refer to any number of files. These files are part of
 the plugin folder. In `plugin.properties` they are referred relative to
 the plugin folder, that is by file name. Example:
 
+::: {.preformatted .panel style="border-width: 1px;"}
+::: {.preformattedHeader .panelHeader style="border-bottom-width: 1px;"}
 **plugin.properties**
+:::
 
+::: {.preformattedContent .panelContent}
     incoming-dir = ${incoming-root-dir}/incoming-hcs
     incoming-data-completeness-condition = auto-detection
     top-level-data-set-handler = ch.systemsx.cisd.openbis.dss.etl.jython.JythonPlateDataSetHandler
@@ -207,8 +225,10 @@ the plugin folder, that is by file name. Example:
     storage-processor = ch.systemsx.cisd.openbis.dss.etl.PlateStorageProcessor
     storage-processor.data-source = imaging-db
     storage-processor.define-channels-per-experiment = false
+:::
+:::
 
-Merging Configuration Data
+Merging Configuration Data {#CorePlugins-MergingConfigurationData}
 --------------------------
 
 At start up of AS and DSS merges  the content of  `service.properties`
@@ -217,7 +237,11 @@ enabled module. Plugin properties can be deleted by adding
 `<plugin ID>.<plugin property key> = __DELETED__` to service.properties.
 Example:
 
+::: {.preformatted .panel style="border-width: 1px;"}
+::: {.preformattedContent .panelContent}
     simple-dropbox.incoming-data-completeness-condition = __DELETED__
+:::
+:::
 
 This leads to a deletion of the property
 `incoming-data-completeness-condition` specified in `plugins.properties`
@@ -233,7 +257,7 @@ plugin ID is appended to the related property in  `service.properties`
 for this plugin type. For example, plugins of type `drop-boxes` are
 added to the property `inputs`.
 
-Enabling Modules and Disabling Plugins
+Enabling Modules and Disabling Plugins {#CorePlugins-EnablingModulesandDisablingPlugins}
 --------------------------------------
 
 There are three methods to control which plugins are available and witch
@@ -247,36 +271,48 @@ not:
 -   disabling by marker file: Plugin developers should use this method
     when developing new plugins.
 
-### Enabling Modules
+### Enabling Modules {#CorePlugins-EnablingModules}
 
 The property `enabled-modules` in `core-plugins.properties` is a
 comma-separated list of regular expressions denoting modules. All
 plugins in a module folder of `core-plugins` folder are enabled if the
 module name matches one of these regular expressions. If this list is
-empty or the property hasn't been specified no core-plugin will be used.
-Note, that this property is manipulated by openBIS Installer for
+empty or the property hasn\'t been specified no core-plugin will be
+used. Note, that this property is manipulated by openBIS Installer for
 Standard Technologies. Example:
 
+::: {.preformatted .panel style="border-width: 1px;"}
+::: {.preformattedHeader .panelHeader style="border-bottom-width: 1px;"}
 **service.properties**
+:::
 
+::: {.preformattedContent .panelContent}
     enabled-modules = screening, proteomics, dev-module-.*
+:::
+:::
 
-### Disabling Core Plugins by Property
+### Disabling Core Plugins by Property {#CorePlugins-DisablingCorePluginsbyProperty}
 
 The property `disabled-core-plugins` in `core-plugins.properties` allows
 to disable plugins selectively either by module name, module combined
 with plugin type or full plugin ID. Example:
 
+::: {.preformatted .panel style="border-width: 1px;"}
+::: {.preformattedHeader .panelHeader style="border-bottom-width: 1px;"}
 **service.properties**
+:::
 
+::: {.preformattedContent .panelContent}
     disabled-core-plugins = screening, proteomics:reporting-plugins, proteomics:maintenance-tasks:data-set-clean-up
+:::
+:::
 
-### Disabling Core Plugins by Marker File
+### Disabling Core Plugins by Marker File {#CorePlugins-DisablingCorePluginsbyMarkerFile}
 
 The empty marker file `disabled` in a certain plugin folder disables the
 particular plugin.
 
-Core Plugin Dependency
+Core Plugin Dependency {#CorePlugins-CorePluginDependency}
 ----------------------
 
 A core plugin can depend on another core plugin. The dependency is
@@ -286,11 +322,17 @@ of core-plugins on which it depends. The dependency can be specified
 selectively either by module name, module combined with plugin type or
 full plugin ID. Example:
 
+::: {.preformatted .panel style="border-width: 1px;"}
+::: {.preformattedHeader .panelHeader style="border-bottom-width: 1px;"}
 **core-plugin.properties**
+:::
 
+::: {.preformattedContent .panelContent}
     required-plugins = module-a, module-b:initialize-master-data, module-b:reporting-plugins, module-a:drop-boxes:generic
+:::
+:::
 
-Rules for Plugin Writers
+Rules for Plugin Writers {#CorePlugins-RulesforPluginWriters}
 ------------------------
 
 As a consequence of the way plugins are merged with 
@@ -315,16 +357,20 @@ rules:
     add your module to the property `enabled-modules` in
     `core-plugins.properties`.
 
-Using Java libraries in Core Plugins
+Using Java libraries in Core Plugins {#CorePlugins-UsingJavalibrariesinCorePlugins}
 ------------------------------------
 
 OpenBIS allows you to include Java libraries in core plugin folders. The
-\*.jar files have to be stored in "&lt;code plugin folder&gt;/lib"
-folder. For instance, in order to use "my-lib.jar" in "my-dropbox" a
+\*.jar files have to be stored in \"\<code plugin folder\>/lib\" folder.
+For instance, in order to use \"my-lib.jar\" in \"my-dropbox\" a
 following file structure is needed:
 
+::: {.preformatted .panel style="border-width: 1px;"}
+::: {.preformattedHeader .panelHeader style="border-bottom-width: 1px;"}
 **service.properties**
+:::
 
+::: {.preformattedContent .panelContent}
     my-technology
         1
           dss
@@ -334,14 +380,26 @@ following file structure is needed:
                   my-lib.jar
                 dropbox.py
                 plugin.properties
+:::
+:::
 
-Having this structure, Java classes from "my-lib.jar" can be imported
-and used in "dropbox.py" script.
+Having this structure, Java classes from \"my-lib.jar\" can be imported
+and used in \"dropbox.py\" script.
 
 NOTICE: Currently this feature is only supported for DSS core
 plugins. Under the hood, a symbolic link to a jar file is created in
-"datastore\_server/lib" folder during DSS startup.
+\"datastore\_server/lib\" folder during DSS startup.
+:::
+:::
+:::
 
+::: {#footer role="contentinfo"}
+::: {.section .footer-body}
 Document generated by Confluence on Mar 14, 2023 09:10
 
+::: {#footer-logo}
 [Atlassian](https://www.atlassian.com/)
+:::
+:::
+:::
+:::
