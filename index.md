@@ -1,3 +1,30 @@
+<span id="title-text">Space Details:</span>
+===========================================
+
+<table>
+<tbody>
+<tr class="odd">
+<td>Key</td>
+<td>openBISDoc2010</td>
+</tr>
+<tr class="even">
+<td>Name</td>
+<td>openBIS Documentation Rel. 20.10</td>
+</tr>
+<tr class="odd">
+<td>Description</td>
+<td>Documentation of the openBIS system, Release 20.10</td>
+</tr>
+<tr class="even">
+<td>Created by</td>
+<td>bs-ahendriks (Sep 30, 2020)</td>
+</tr>
+</tbody>
+</table>
+
+  
+  
+
 Available Pages:
 ----------------
 
