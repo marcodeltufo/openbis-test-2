@@ -1,3 +1,6 @@
+Core Plugins
+============
+
 .. container::
    :name: page
 
