@@ -1,3 +1,5 @@
+index
+====
 .. container::
    :name: page
 
@@ -24,11 +26,12 @@
             Created by  bs-ahendriks (Sep 30, 2020)
             =========== ==================================================
 
+ 
 .. toctree::
    :maxdepth: 4
-
-   Core-Plugins_53745960
-   Custom-Import_53746004
-   Jython-Master-Data-Scripts_53746018
-   openBIS-webapps_53745961
-   Showing-Samples_53745947
+ 
+   Core-Plugins
+   Custom-Import
+   Jython-Master-Data-Scripts
+   openBIS-webapps
+   Showing-Samples
