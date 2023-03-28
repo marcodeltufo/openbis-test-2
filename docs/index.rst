@@ -24,14 +24,6 @@
             Created by  bs-ahendriks (Sep 30, 2020)
             =========== ==================================================
 
-         .. container:: pageSection
-
-            .. container:: pageSectionHeader
-
-               .. rubric:: Available Pages:
-                  :name: available-pages
-                  :class: pageSectionTitle
-
 .. toctree::
    :maxdepth: 4
 
