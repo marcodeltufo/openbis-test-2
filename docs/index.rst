@@ -32,14 +32,15 @@
                   :name: available-pages
                   :class: pageSectionTitle
 
-            -  `Custom Import <Custom-Import_53746004.html>`__
-            -  `Jython Master Data
-               Scripts <Jython-Master-Data-Scripts_53746018.html>`__
-            -  `Core Plugins <Core-Plugins_53745960.html>`__
+.. toctree::
+   :maxdepth: 4
 
-               -  `openBIS webapps <openBIS-webapps_53745961.html>`__
+   Core-Plugins_53745960
+   Custom-Import_53746004
+   Jython-Master-Data-Scripts_53746018
+   openBIS-webapps_53745961
+   Showing-Samples_53745947
 
-                  -  `Showing Samples <Showing-Samples_53745947.html>`__
 
    .. container::
       :name: footer
